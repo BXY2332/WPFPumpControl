@@ -1,0 +1,50 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Motor.Controls">
+
+
+    <Style TargetType="{x:Type local:MotorControl}">
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="120"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MotorControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="10"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Path x:Name="ice" Grid.Row="0" Fill="Gray" Stretch="Uniform" Data="
+                                  M401.066667 157.866667h-36.266667L320 202.666667v179.2h-98.133333l-34.133334 64h213.333334zM448 475.733333l-2.133333 219.733334h266.666666s-32-456.533333-241.066666-456.533334h-61.866667v196.266667h12.8c8.533333 0 25.6 12.8 25.6 40.533333zM437.333333 748.8h285.866667v44.8H437.333333zM53.333333 704h917.333334v27.733333h-917.333334zM437.333333 821.333333h285.866667v44.8H437.333333z"/>
+                            <TextBlock x:Name="txt" Grid.Row="1" Text="{TemplateBinding DeviceName}" Foreground="Black" FontSize="20"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="DeviceState" Value="Fault">
+                            <Setter TargetName="ice" Property="Fill" Value="Red"/>
+                            <Setter TargetName="txt" Property="Foreground" Value="Red"/>
+                        </Trigger>
+
+                        <Trigger Property="DeviceState" Value="Standby">
+                            <Setter TargetName="ice" Property="Fill" Value="Gray"/>
+                            <Setter TargetName="txt" Property="Foreground" Value="Gray"/>
+                        </Trigger>
+
+                        <Trigger Property="DeviceState" Value="Running">
+                            <Setter TargetName="ice" Property="Fill" Value="Green"/>
+                            <Setter TargetName="txt" Property="Foreground" Value="Green"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
